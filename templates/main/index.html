@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block main_work %}
+<div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col mt-4">
+        <h2>Add Item</h2>
+        <form action="add_todo/" method="post" class="form-inline">
+            {% csrf_token %}
+            <input type="text" class="form-control mb-z mr-sm-2" placeholder="Enter a new task" name="task" id="">
+            <input type="submit" class="btn btn-primary mb-2" value="Create">
+        </form>
+    </div>
+    <div class="col">
+
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+        {% for do_item in to_items %}
+        <ul class="list-group">
+            <li class="list-group-item">{{ do_item }}
+                <div class="float-right">
+                    <form action="delete_todo/{{do_item.id}}" method="post">
+                        {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger" value="Delete">Delete</button>
+                    </form>
+                </div>
+                <div class="float-right">
+                    <form action="update/{{do_item.id}}" method="post">
+                        {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-warning" value="Update">Update</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock main_work %}
