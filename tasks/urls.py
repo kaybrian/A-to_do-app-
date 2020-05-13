@@ -6,4 +6,5 @@ app_name = 'tasks'
 
 urlpatterns = [
     path('',views.index,name='index'),
+    path('update/<str:pk>/',views.updateTask,name='update_task'),
 ]

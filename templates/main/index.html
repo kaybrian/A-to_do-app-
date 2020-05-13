@@ -15,7 +15,13 @@
         </form>
         {% for task in tasks %}
         <ul class="list-group">
-            <li class="list-group-item">{{task}}</li>
+            <li class="list-group-item">{{task}}
+                <div class="float-right">
+                    <button class="btn btn-sm btn-warning"><a href="{% url 'tasks:update_task' task.id %}">Update</a></button>
+                    
+                </div>
+            </li>
+
         </ul>
         {% endfor  %}
     </div>

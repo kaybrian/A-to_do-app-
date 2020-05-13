@@ -16,3 +16,8 @@ def index(request):
     context = {'tasks': tasks,
                'form':form}
     return render(request, 'main/index.html', context)
+
+
+def updateTask(request,pk):
+    taski = Task.objects.get(id=pk) 
+    return render(request,'main/update_task.html')
