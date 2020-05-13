@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 {% extends "main/base.html" %}
-
 {% load static %}
+
+
 
 {% block main_work %}
 <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <h2>Hello there welcome </h2>
+    <div class="col-md-8 justify-content-center">
+        <h2 class="welcome">Add and Delete things you are to do and did  </h2>
         <form action="/" class="inline-form mb-3" method="post">
             {% csrf_token %}
             {{form.title}}<br>
@@ -15,11 +16,21 @@
         </form>
         {% for task in tasks %}
         <ul class="list-group">
+            {% if task.complete == True %}
+            <li class="list-group-item"><strike>{{task}}</strike>
+                <div class="float-right">
+                    <button class="btn btn-sm btn-warning"><a href="{% url 'tasks:update_task' task.id %}">Update</a></button>
+                    <button class="btn btn-sm btn-danger"><a href="{% url 'tasks:delete_task' task.id %}">Delete</a></button>
+                </div>
+            </li>
+            {% else %}
             <li class="list-group-item">{{task}}
                 <div class="float-right">
                     <button class="btn btn-sm btn-warning"><a href="{% url 'tasks:update_task' task.id %}">Update</a></button>
+                    <button class="btn btn-sm btn-danger"><a href="{% url 'tasks:delete_task' task.id %}">Delete</a></button>
                 </div>
             </li>
+            {% endif %}
 
         </ul>
         {% endfor  %}
