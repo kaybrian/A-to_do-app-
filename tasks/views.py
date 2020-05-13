@@ -6,7 +6,7 @@ from .forms import *
 
 
 def index(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.all().order_by('-id')
     form = TaskForm()
     if request.method == 'POST':
         form = TaskForm(request.POST)
